@@ -117,9 +117,123 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/JS/index.js":[function(require,module,exports) {
-console.log(1);
-},{}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+})({"src/JS/modules/functions.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createEl = createEl;
+exports.scrollByX = scrollByX;
+function createEl() {
+  var tag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "div";
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var el = document.createElement(tag);
+  if (options.className) el.className = options.className;
+  if (options.textContent) el.textContent = options.textContent;
+  return el;
+}
+function scrollByX(el) {
+  el.scrollIntoView({
+    behavior: "smooth",
+    inline: "start"
+  });
+}
+},{}],"src/JS/modules/Swiper.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Swiper = void 0;
+var _functions = require("./functions");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var root = document.querySelector("#root");
+var input = (0, _functions.createEl)("input", {
+  className: "input"
+});
+root.append(input);
+var Swiper = /*#__PURE__*/function () {
+  function Swiper(parentNode) {
+    _classCallCheck(this, Swiper);
+    _defineProperty(this, "swiperElementsList", []);
+    _defineProperty(this, "swiper", (0, _functions.createEl)("div", {
+      className: "swiper"
+    }));
+    _defineProperty(this, "page", 0);
+    parentNode.append(this.swiper);
+  }
+  _createClass(Swiper, [{
+    key: "addSlide",
+    value: function addSlide(price, description) {
+      this.slide = (0, _functions.createEl)("div", {
+        className: "slide"
+      });
+      this.arrowNext = (0, _functions.createEl)("div", {
+        className: "arrow arrowNext",
+        textContent: "➤"
+      });
+      this.arrowPrev = (0, _functions.createEl)("div", {
+        className: "arrow arrowPrev",
+        textContent: "➤"
+      });
+      this.info = (0, _functions.createEl)("div", {
+        className: "info"
+      });
+      this.price = (0, _functions.createEl)("div", {
+        className: "price",
+        textContent: price
+      });
+      this.description = (0, _functions.createEl)("div", {
+        className: "description",
+        textContent: description
+      });
+      this.info.append(this.price, this.description);
+      this.slide.append(this.arrowPrev, this.arrowNext, this.info);
+      this.swiper.append(this.slide);
+      this.swiperElementsList.push({
+        slide: this.slide,
+        arrowNext: this.arrowNext,
+        arrowPrev: this.arrowPrev,
+        price: this.price,
+        description: this.description
+      });
+    }
+  }, {
+    key: "addEvents",
+    value: function addEvents() {
+      var _this = this;
+      this.swiperElementsList.forEach(function (slide) {
+        slide.arrowNext.addEventListener("click", function () {
+          _this.page++;
+          if (_this.page > _this.swiperElementsList.length - 1) _this.page = 0;
+          (0, _functions.scrollByX)(_this.swiperElementsList[_this.page].slide);
+        });
+        slide.arrowPrev.addEventListener("click", function () {
+          _this.page--;
+          if (_this.page < 0) _this.page = _this.swiperElementsList.length - 1;
+          (0, _functions.scrollByX)(_this.swiperElementsList[_this.page].slide);
+        });
+      });
+    }
+  }]);
+  return Swiper;
+}();
+exports.Swiper = Swiper;
+var swiper = new Swiper(root);
+swiper.addSlide("50 BYN", "1st");
+swiper.addSlide("100 BYN", "2nd");
+swiper.addSlide("150 BYN", "3th");
+swiper.addEvents();
+},{"./functions":"src/JS/modules/functions.js"}],"src/JS/index.js":[function(require,module,exports) {
+"use strict";
+
+var _functions = require("./modules/functions");
+var _Swiper = require("./modules/Swiper");
+},{"./modules/functions":"src/JS/modules/functions.js","./modules/Swiper":"src/JS/modules/Swiper.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -144,7 +258,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64466" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61512" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

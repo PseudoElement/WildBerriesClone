@@ -1,8 +1,150 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a :focus, a :active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 20px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button ::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a :visited {
+  text-decoration: none;
+}
+
+a :hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
 body {
   background-color: aqua;
 }
 body a {
   font-size: 10px;
+}
+
+#root {
+  border: 2px solid rgb(149, 12, 12);
+}
+
+.swiper {
+  user-select: none;
+  border: 2px solid black;
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  height: 400px;
+  overflow: hidden;
+}
+.swiper .slide {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+}
+.swiper .slide:nth-child(1) {
+  background-color: rgb(208, 241, 20);
+}
+.swiper .slide:nth-child(2) {
+  background-color: rgb(105, 23, 219);
+}
+.swiper .slide:nth-child(3) {
+  background-color: yellow;
+}
+.swiper .slide .info {
+  display: flex;
+  align-items: center;
+}
+.swiper .slide .info .description {
+  font-size: 40px;
+}
+.swiper .slide .arrow {
+  color: rgb(123, 9, 204);
+  opacity: 0.6;
+  position: absolute;
+  top: 50%;
+  font-size: 40px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.swiper .slide .arrow:hover {
+  color: rgb(212, 78, 100);
+  animation-name: arrow-twitch;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+@keyframes arrow-twitch {
+  0% {
+    top: 50%;
+  }
+  100% {
+    top: 49%;
+  }
+}
+.swiper .slide .arrow.arrowNext {
+  right: 0;
+}
+.swiper .slide .arrow.arrowPrev {
+  left: 0;
+  transform: rotate(180deg);
 }
 
 /*# sourceMappingURL=/styles.d5af2b6d.css.map */

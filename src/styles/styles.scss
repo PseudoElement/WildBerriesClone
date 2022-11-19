@@ -1,6 +1,76 @@
-body{
+@import "null.scss";
+body {
     background-color: aqua;
-    a{
+    a {
         font-size: 10px;
+    }
+}
+#root {
+    border: 2px solid rgb(149, 12, 12);
+}
+.swiper {
+    user-select: none;
+    border: 2px solid black;
+    margin: 0 auto;
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    height: 400px;
+    overflow: hidden;
+    .slide {
+        &:nth-child(1) {
+            background-color: rgb(208, 241, 20);
+        }
+        &:nth-child(2) {
+            background-color: rgb(105, 23, 219);
+        }
+        &:nth-child(3) {
+            background-color: yellow;
+        }
+        width: 100%;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        position: relative;
+        .info {
+            display: flex;
+            align-items: center;
+            .price {
+            }
+            .description {
+                font-size: 40px;
+            }
+        }
+        .arrow {
+            color: rgb(123, 9, 204);
+            opacity: 0.6;
+            position: absolute;
+            top: 50%;
+            font-size: 40px;
+            cursor: pointer;
+            transition: all .3s;
+            &:hover{
+                color: rgb(212, 78, 100);
+                animation-name: arrow-twitch;
+                animation-duration: .3s;
+                animation-fill-mode: forwards;
+                @keyframes arrow-twitch {
+                    0%{
+                        top: 50%;
+                    }
+                    100%{
+                        top: 49%;
+                    }
+                }
+            }
+            &.arrowNext {
+                right: 0;
+            }
+            &.arrowPrev {
+                left: 0;
+                transform: rotate(180deg);
+            }
+        }
     }
 }
