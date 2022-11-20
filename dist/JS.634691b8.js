@@ -117,29 +117,189 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/JS/modules/functions.js":[function(require,module,exports) {
+})({"src/JS/modules/HeaderEvents.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.menu = exports.closeBtn = exports.burger = void 0;
+var _SubLists = require("./SubLists");
+var _functions = require("./functions");
+var burger = document.querySelector(".list");
+exports.burger = burger;
+var header = document.querySelector("header");
+var closeBtn = document.getElementsByClassName("close-button")[0];
+exports.closeBtn = closeBtn;
+var menu = document.querySelector("section.menu");
+exports.menu = menu;
+var input = document.querySelector(".header_wrapper input");
+var liList = document.querySelectorAll("section ul li");
+input.addEventListener("click", function (event) {
+  event.target.style.opacity = 1;
+});
+burger.addEventListener("click", function (event) {
+  event.stopPropagation();
+  menu.style.left = "0";
+  menu.style.transition = "all .5s";
+  closeBtn.style.left = "".concat(menu.offsetWidth + 5, "px");
+  (0, _functions.toggleDisability)('ON');
+});
+closeBtn.addEventListener("click", function () {
+  (0, _functions.closeList)();
+  (0, _functions.toggleDisability)('OFF');
+});
+var prevScrollValue = window.scrollY;
+window.addEventListener("scroll", function () {
+  var currentScrollValue = window.scrollY;
+  if (currentScrollValue > 200) {
+    if (currentScrollValue > prevScrollValue) {
+      header.style.transition = "all .3s";
+      header.style.top = "-90px";
+    } else {
+      header.style.top = "0px";
+    }
+    prevScrollValue = currentScrollValue;
+  }
+});
+window.addEventListener("click", function (event) {
+  if (!event.target.closest(".list") && !event.target.closest(".menu") && !event.target.closest(".subList-wrapper")) {
+    (0, _functions.closeList)();
+  }
+  if (event.target != input) {
+    input.style.opacity = 0.5;
+  }
+  (0, _functions.toggleDisability)('OFF');
+});
+liList.forEach(function (li) {
+  li.addEventListener("mouseover", function () {
+    if (Array.from(li.classList).includes('forWomen')) {
+      (0, _functions.switchONsublist)(0);
+    }
+    if (Array.from(li.classList).includes('shoes')) {
+      (0, _functions.switchONsublist)(1);
+    }
+  });
+});
+},{"./SubLists":"src/JS/modules/SubLists.js","./functions":"src/JS/modules/functions.js"}],"src/JS/modules/functions.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.closeList = closeList;
 exports.createEl = createEl;
 exports.scrollByX = scrollByX;
+exports.switchONsublist = switchONsublist;
+exports.toggleDisability = toggleDisability;
+var _HeaderEvents = require("./HeaderEvents");
+var _SubLists = require("./SubLists");
 function createEl() {
   var tag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "div";
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var el = document.createElement(tag);
+  if (options.src) el.src = options.src;
   if (options.className) el.className = options.className;
   if (options.textContent) el.textContent = options.textContent;
   return el;
 }
-function scrollByX(el) {
-  el.scrollIntoView({
-    behavior: "smooth",
-    inline: "start"
+function scrollByX(el, slide) {
+  el.scrollTo({
+    top: 0,
+    left: slide.offsetLeft,
+    behavior: "smooth"
   });
 }
-},{}],"src/JS/modules/Swiper.js":[function(require,module,exports) {
+function closeList() {
+  _HeaderEvents.menu.style.left = "-25rem";
+  _HeaderEvents.closeBtn.style.left = "-20rem";
+  _SubLists.subListsArray.forEach(function (sublist) {
+    sublist.classList.remove("active");
+  });
+}
+function switchONsublist(index) {
+  _SubLists.subListsArray.forEach(function (sublist) {
+    sublist.classList.remove("active");
+  });
+  _SubLists.subListsArray[index].classList.add("active");
+  _HeaderEvents.closeBtn.style.left = "".concat(_HeaderEvents.menu.offsetWidth + _SubLists.subListsArray[index].offsetWidth + 5, "px");
+}
+function toggleDisability(type) {
+  if (type === 'ON') {
+    Array.from(document.body.children).forEach(function (child) {
+      Array.from(child.children).forEach(function (subChild) {
+        if (!Array.from(subChild.classList).includes('menu') && !Array.from(subChild.classList).includes("subList-wrapper")) {
+          subChild.classList.add('passive');
+        }
+      });
+    });
+  } else {
+    Array.from(document.body.children).forEach(function (child) {
+      Array.from(child.children).forEach(function (subChild) {
+        if (!Array.from(subChild.classList).includes('menu') && !Array.from(subChild.classList).includes("subList-wrapper")) {
+          subChild.classList.remove('passive');
+        }
+      });
+    });
+  }
+}
+},{"./HeaderEvents":"src/JS/modules/HeaderEvents.js","./SubLists":"src/JS/modules/SubLists.js"}],"src/JS/modules/SubLists.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.subListsArray = exports.SubList = void 0;
+var _functions = require("./functions");
+var _HeaderEvents = require("./HeaderEvents");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+var main = document.querySelector("main");
+var subListsArray = [];
+exports.subListsArray = subListsArray;
+var SubList = /*#__PURE__*/function () {
+  function SubList() {
+    _classCallCheck(this, SubList);
+    this.wrapper = (0, _functions.createEl)("div", {
+      className: "subList-wrapper"
+    });
+    main.append(this.wrapper);
+    this.wrapper.style.position = "fixed";
+    this.wrapper.style.zIndex = 11;
+    this.wrapper.style.borderRadius = "10px";
+    this.wrapper.style.top = "".concat(_HeaderEvents.menu.offsetTop, "px");
+    this.wrapper.style.left = "".concat(_HeaderEvents.menu.offsetWidth, "px");
+    this.wrapper.style.height = "".concat(_HeaderEvents.menu.offsetHeight, "px");
+    this.wrapper.style.width = "300px";
+    this.wrapper.style.backgroundColor = "pink";
+    subListsArray.push(this.wrapper);
+  }
+  _createClass(SubList, [{
+    key: "addItem",
+    value: function addItem(text) {
+      this.item = (0, _functions.createEl)("div", {
+        className: "item",
+        textContent: text
+      });
+      this.wrapper.append(this.item);
+    }
+  }, {
+    key: "addDefiniteNumberOfItems",
+    value: function addDefiniteNumberOfItems(number) {
+      for (var counter = 0; counter < number; counter++) {
+        this.addItem("Item"); //<---Как здесь добавлять на каждый шаг разный текст,
+      } //если не хардкодить с кучей if(counter===...){this.addItem('NewText)};
+    }
+  }]);
+  return SubList;
+}();
+exports.SubList = SubList;
+var forWomen = new SubList();
+forWomen.addDefiniteNumberOfItems(20);
+var shoes = new SubList();
+shoes.addDefiniteNumberOfItems(10);
+},{"./functions":"src/JS/modules/functions.js","./HeaderEvents":"src/JS/modules/HeaderEvents.js"}],"src/JS/modules/Swiper.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -151,26 +311,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-var root = document.querySelector("#root");
-var input = (0, _functions.createEl)("input", {
-  className: "input"
-});
-root.append(input);
+///<---У меня не получилось импортировать сюда картинки, 
+var main = document.querySelector("main"); ///можешь сам попробовать
 var Swiper = /*#__PURE__*/function () {
   function Swiper(parentNode) {
     _classCallCheck(this, Swiper);
-    _defineProperty(this, "swiperElementsList", []);
+    _defineProperty(this, "slidesList", []);
     _defineProperty(this, "swiper", (0, _functions.createEl)("div", {
       className: "swiper"
     }));
     _defineProperty(this, "page", 0);
-    parentNode.append(this.swiper);
+    parentNode.prepend(this.swiper);
   }
   _createClass(Swiper, [{
     key: "addSlide",
-    value: function addSlide(price, description) {
+    value: function addSlide() {
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       this.slide = (0, _functions.createEl)("div", {
         className: "slide"
+      });
+      this.image = (0, _functions.createEl)("image", {
+        className: "image-bg"
       });
       this.arrowNext = (0, _functions.createEl)("div", {
         className: "arrow arrowNext",
@@ -185,16 +346,16 @@ var Swiper = /*#__PURE__*/function () {
       });
       this.price = (0, _functions.createEl)("div", {
         className: "price",
-        textContent: price
+        textContent: options.price
       });
       this.description = (0, _functions.createEl)("div", {
         className: "description",
-        textContent: description
+        textContent: options.description
       });
       this.info.append(this.price, this.description);
-      this.slide.append(this.arrowPrev, this.arrowNext, this.info);
+      this.slide.append(this.arrowPrev, this.arrowNext, this.image, this.info);
       this.swiper.append(this.slide);
-      this.swiperElementsList.push({
+      this.slidesList.push({
         slide: this.slide,
         arrowNext: this.arrowNext,
         arrowPrev: this.arrowPrev,
@@ -206,34 +367,60 @@ var Swiper = /*#__PURE__*/function () {
     key: "addEvents",
     value: function addEvents() {
       var _this = this;
-      this.swiperElementsList.forEach(function (slide) {
+      this.slidesList.forEach(function (slide) {
         slide.arrowNext.addEventListener("click", function () {
+          _this.autoScroll();
           _this.page++;
-          if (_this.page > _this.swiperElementsList.length - 1) _this.page = 0;
-          (0, _functions.scrollByX)(_this.swiperElementsList[_this.page].slide);
+          if (_this.page > _this.slidesList.length - 1) _this.page = 0;
+          // console.log( window.scrollX + this.slidesList[this.page].slide.getBoundingClientRect().left);<---посмотри, как изменяется абсолютное значение по Х для третьего слайда, в чем проблема?
+          (0, _functions.scrollByX)(_this.swiper, _this.slidesList[_this.page].slide); // Я час сидел не мог понять почему это так работает, пока не добавил координату через offsetLeft
         });
+
         slide.arrowPrev.addEventListener("click", function () {
+          clearInterval(_this.idInterval);
           _this.page--;
-          if (_this.page < 0) _this.page = _this.swiperElementsList.length - 1;
-          (0, _functions.scrollByX)(_this.swiperElementsList[_this.page].slide);
+          if (_this.page < 0) _this.page = _this.slidesList.length - 1;
+          (0, _functions.scrollByX)(_this.swiper, _this.slidesList[_this.page].slide);
         });
       });
+    }
+  }, {
+    key: "autoScroll",
+    value: function autoScroll() {
+      var _this2 = this;
+      this.idInterval = setInterval(function () {
+        _this2.page++;
+        if (_this2.page > _this2.slidesList.length - 1) _this2.page = 0;
+        (0, _functions.scrollByX)(_this2.swiper, _this2.slidesList[_this2.page].slide);
+      }, 3000);
     }
   }]);
   return Swiper;
 }();
 exports.Swiper = Swiper;
-var swiper = new Swiper(root);
-swiper.addSlide("50 BYN", "1st");
-swiper.addSlide("100 BYN", "2nd");
-swiper.addSlide("150 BYN", "3th");
+var swiper = new Swiper(main);
+swiper.addSlide();
+swiper.addSlide();
+swiper.addSlide();
 swiper.addEvents();
+swiper.autoScroll();
+window.addEventListener('mouseover', function (event) {
+  if (event.target.className === 'slide') {
+    event.target.style.opacity = 0.8;
+  } else {
+    document.querySelectorAll('.slide').forEach(function (slide) {
+      slide.style.opacity = 1;
+    });
+  }
+});
 },{"./functions":"src/JS/modules/functions.js"}],"src/JS/index.js":[function(require,module,exports) {
 "use strict";
 
+var _SubLists = require("./modules/SubLists");
 var _functions = require("./modules/functions");
 var _Swiper = require("./modules/Swiper");
-},{"./modules/functions":"src/JS/modules/functions.js","./modules/Swiper":"src/JS/modules/Swiper.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var _HeaderEvents = require("./modules/HeaderEvents");
+},{"./modules/SubLists":"src/JS/modules/SubLists.js","./modules/functions":"src/JS/modules/functions.js","./modules/Swiper":"src/JS/modules/Swiper.js","./modules/HeaderEvents":"src/JS/modules/HeaderEvents.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -258,7 +445,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61512" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50986" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
