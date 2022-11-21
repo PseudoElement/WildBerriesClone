@@ -13,11 +13,11 @@ main {
     padding: 1rem;
     height: 2000px;
 }
-.active{
+.active {
     opacity: 1;
     pointer-events: auto;
 }
-.passive{
+.passive {
     opacity: 0.5;
     pointer-events: none;
 }
@@ -30,7 +30,7 @@ header {
     background: url(./BG/header-BG.jpg);
     background-size: cover;
     padding: 1rem 0;
-    .header_wrapper{
+    .header_wrapper {
         display: flex;
         justify-content: space-between;
         width: 100%;
@@ -39,7 +39,7 @@ header {
         padding: 0rem 1rem;
         align-items: center;
         gap: 1rem;
-        .svg{
+        .svg {
             height: 3.5rem;
             display: flex;
             flex-direction: column;
@@ -47,31 +47,31 @@ header {
             justify-content: space-between;
             color: rgb(133, 133, 133);
             cursor: pointer;
-            transition: all .3s;
-            &:hover{
+            transition: all 0.3s;
+            &:hover {
                 color: aliceblue;
             }
         }
-        img{
+        img {
             width: 2rem;
             height: 2rem;
         }
-        .list{
+        .list {
             border: 2px solid rgb(133, 128, 128);
             padding: 10px;
             border-radius: 5px;
-            transition: all .3s;
+            transition: all 0.3s;
             cursor: pointer;
-            &:hover{
+            &:hover {
                 border-color: aliceblue;
             }
         }
-        .logo{
+        .logo {
             // height: 100%;
             max-width: 20rem;
             min-width: 12rem;
             min-height: 2rem;
-            img{
+            img {
                 min-height: 2rem;
                 height: 100%;
                 // object-fit: cover;
@@ -79,7 +79,7 @@ header {
                 // width: 500px;
             }
         }
-        input{
+        input {
             opacity: 0.5;
             height: 3rem;
             border-radius: 20px;
@@ -100,9 +100,9 @@ header {
     max-width: 1200px;
     height: 400px;
     overflow: hidden;
-    transition: all .5s;
+    transition: all 0.5s;
     .slide {
-        transition: all .5s;
+        transition: all 0.5s;
         background-size: 100% 100%;
         &:nth-child(1) {
             background-image: url(./pics/big_bf_main_new_18_11_22.jpg);
@@ -160,7 +160,7 @@ header {
         }
     }
 }
-.menu{
+.menu {
     font-size: 20px;
     position: fixed;
     top: 0;
@@ -171,7 +171,8 @@ header {
     font-size: 1.6rem;
     width: 100%;
     max-width: 20rem;
-    ul{text-align: center;
+    ul {
+        text-align: center;
         border: 2px solid rgb(80, 23, 185);
         border-radius: 10px;
         display: flex;
@@ -180,40 +181,49 @@ header {
         background: white;
         height: 100%;
         padding: 1rem;
-        li{flex: 1 0 auto;
-            transition: all .2s;
+        li {
+            flex: 1 0 auto;
+            transition: all 0.3s;
             padding-top: 7px;
             cursor: pointer;
-            &:hover{
-                background-color: purple;
+            &:hover {
+                background-color: rgb(188, 30, 135);
                 color: white;
                 border-radius: 10px;
             }
         }
     }
-    .close-button{
+    .close-button {
         position: absolute;
         left: 20rem;
-        color: rgb(36, 200, 219);
+        color: rgb(209, 229, 232);
         font-size: 3rem;
         cursor: pointer;
     }
 }
-.subList-wrapper{
-    font-size: 1.8rem;
-    text-align: center;
+.subList-wrapper {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    text-align: left;
     display: none;
     overflow: auto;
-    &.active{
-        display: block;
+    padding: 1rem;
+    &.active {
+        display: flex;
     }
-    .item{
+    .item {
+        transition: all 0.3s;
+        flex: 1 0 10%;
+        // padding-top: 7px;
+        display: flex;
+        align-items: center;
         cursor: pointer;
-        margin:10px 0 ;
         color: gray;
-        &:hover{
+        &:hover {
+            background-color: antiquewhite;
+            border-radius: 10px;
             color: black;
-            transition: all .5s;
         }
     }
 }

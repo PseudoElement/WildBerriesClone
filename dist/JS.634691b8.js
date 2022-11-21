@@ -179,6 +179,39 @@ liList.forEach(function (li) {
     if (Array.from(li.classList).includes('shoes')) {
       (0, _functions.switchONsublist)(1);
     }
+    if (Array.from(li.classList).includes('forChildren')) {
+      (0, _functions.switchONsublist)(2);
+    }
+    if (Array.from(li.classList).includes('forMen')) {
+      (0, _functions.switchONsublist)(3);
+    }
+    if (Array.from(li.classList).includes('house')) {
+      (0, _functions.switchONsublist)(4);
+    }
+    if (Array.from(li.classList).includes('newYear')) {
+      (0, _functions.switchONsublist)(5);
+    }
+    if (Array.from(li.classList).includes('beauty')) {
+      (0, _functions.switchONsublist)(6);
+    }
+    if (Array.from(li.classList).includes('accessories')) {
+      (0, _functions.switchONsublist)(7);
+    }
+    if (Array.from(li.classList).includes('electro')) {
+      (0, _functions.switchONsublist)(8);
+    }
+    if (Array.from(li.classList).includes('toys')) {
+      (0, _functions.switchONsublist)(9);
+    }
+    if (Array.from(li.classList).includes('furniture')) {
+      (0, _functions.switchONsublist)(10);
+    }
+    if (Array.from(li.classList).includes('forAdult')) {
+      (0, _functions.switchONsublist)(11);
+    }
+    if (Array.from(li.classList).includes('products')) {
+      (0, _functions.switchONsublist)(12);
+    }
   });
 });
 },{"./SubLists":"src/JS/modules/SubLists.js","./functions":"src/JS/modules/functions.js"}],"src/JS/modules/functions.js":[function(require,module,exports) {
@@ -262,8 +295,10 @@ var SubList = /*#__PURE__*/function () {
   function SubList() {
     _classCallCheck(this, SubList);
     this.wrapper = (0, _functions.createEl)("div", {
-      className: "subList-wrapper"
+      //<---В каждом новом подсписке создается новый враппер, в который добавляются товары.
+      className: "subList-wrapper" ///Как сделать общий враппер, чтобы в него добавлялись товары, в зависимости от выбранного пункта и удалялись старые?
     });
+
     main.append(this.wrapper);
     this.wrapper.style.position = "fixed";
     this.wrapper.style.zIndex = 11;
@@ -272,7 +307,7 @@ var SubList = /*#__PURE__*/function () {
     this.wrapper.style.left = "".concat(_HeaderEvents.menu.offsetWidth, "px");
     this.wrapper.style.height = "".concat(_HeaderEvents.menu.offsetHeight, "px");
     this.wrapper.style.width = "300px";
-    this.wrapper.style.backgroundColor = "pink";
+    this.wrapper.style.backgroundColor = "white";
     subListsArray.push(this.wrapper);
   }
   _createClass(SubList, [{
@@ -286,19 +321,54 @@ var SubList = /*#__PURE__*/function () {
     }
   }, {
     key: "addDefiniteNumberOfItems",
-    value: function addDefiniteNumberOfItems(number) {
-      for (var counter = 0; counter < number; counter++) {
-        this.addItem("Item"); //<---Как здесь добавлять на каждый шаг разный текст,
-      } //если не хардкодить с кучей if(counter===...){this.addItem('NewText)};
+    value: function addDefiniteNumberOfItems(arr) {
+      for (var counter = 0; counter < arr.length; counter++) {
+        this.addItem(arr[counter]);
+      }
     }
   }]);
   return SubList;
 }();
 exports.SubList = SubList;
+var forWomenList = ["Блузки и рубашки", "Брюки", "Верхняя одежда", "Джемперы, водолазки и кардиганы", "Джинсы", "Комбинезоны", "Костюмы", "Лонгсливы", "Пиджаки,жилеты и жакеты", "Платья и сарафаны", "Толстовки, свитшоты и худи", "Туники", "Футболки и топы", "Халаты", "Шорты", "Юбки", "Белье", "Большие размеры", "Будущие мамы", "Для высоких", "Для невысоких", "Одежда для дома", "Офис", "Пляжная мода", "Религиозная", "Свадьба", "Спецодежда и СИЗы", "Подарки женщинам"];
+var shoesList = ["Детская", "Для новорожденных", "Женская", "Мужская", "Ортопедическая обувь", "Аксессуары для обуви"];
+var forChildrenList = ["Для девочек", "Для мальчиков", "Для новорожденных", "Детская электроника", "Конструкторы", "Детский транспорт", "Детское питание", "Религиозная одежда", "Товары для малыша", "Подарки детям"];
+var forMenList = ["Брюки", "Верхняя одежда", "Джемперы, водолазки и кардиганы", "Джинсы", "Комбинезоны и полукомбинезоны", "Костюмы", "Лонгсливы", "Майки", "Пиджаки, жилеты и жакеты", "Пижамы", "Рубашки", "Толстовки, свитшоты и худи", "Футболки", "Футболки-поло", "Халаты"];
+var houseList = ["Ванная", "Кухня", "Предметы интерьера", "Спальня", "Гостиная", "Детская", "Досуг и творчество", "Зеркала", "Коврики", "Кронштейны", "Освещение", "Для курения"];
+var newYearList = ["Вечерний образ", "Праздничная обувь", "Наряды для детей", "Карнавальные товары", "Елки", "Новогодний декор", "Новогодние книги", "Открытки", "Подарки", "Подарочная упаковка", "Праздничный стол", "Свечи и подсвечники", "Символ года"];
+var beautyList = ["Аксессуары", "Волосы", "Аптченая косметика", "Детская декоративная косметика", "Для загара", "Для мам и малышей", "Израильская косметика", "Инструменты для парикмахеров", "Корейские бренды", "Макияж", "Мужская линия", "Наборы для ухода", "Ногти", "Органическая косметика", "Парфюмерия", "Уход за кожей", "Гигиена полости рта"];
+var accessoriesList = ["Аксессуары для волос", "Аксессуары для одежды", "Бижутерия", "Веера", "Галстуки и бабочки", "Головные уборы", "Зеркальца", "Зонты", "Кошельки и кредитницы", "Маски для сна", "Носовые платки", "Oчки и футляры", "Перчатки и варежки", "Платки и шарфы", "Религиозные", "Ремни и пояса"];
+var electroList = ["Автоэлеткроника и навигация", "Гарнитуры и наушники", "Детская электроника", "Игровые консоли и игры", "Кабели и зарядные устройства", "Музыка и видео", "Ноутбуки и компьютеры", "Офисная техника", "Развлечения и гаджеты", "Сетевое оборудование", "Системы безопасности", "Смартфоны и телефоны", "Умный дом"];
+var toysList = ["Антистресс", "Для малышей", "Для песочницы", "Игровые комплексы", "Игровые наборы", "Игрушечный транспорт", "Игрушки для ванной", "Интерактивные", "Кинетический песок", "Конструкторы", "Куклы и аксессуары", "Музыкальные", "Мыльные пузыри", "Мягкие игрушки", "Наборы для опытов", "Настольные игры", "Радиоуправляемые", "Сборные модели", "Спортивные игры", "Фигурки и роботы"];
+var furnitureList = ["Бескаркасная мебель", "Детская мебель", "Диваны и кресла", "Столы и стулья", "Мебель для гостиной", "Мебель для кухни", "Мебель для прихожей", "Mебель для спальни", "Офисная мебель", "Мебельная фурнитура"];
+var forAdultList = ["Белье и аксессуары", "Игры и сувениры", "Интимная косметика", "Интимная съедобная косметика", "Презервативы и лубриканты", "Секс игрушки", "Фетиш и БДСМ"];
+var productsList = ["Вкусные подарки", "Чай и кофе", "Сладости и хлебобулочные изделия", "Бакалея", "Детское питание", "Добавик пищевые", "Здоровое питание", "Мясная продукция", "Молочные продукты и яйца", "Напитки", "Снеки", "Замороженная продукция", "Фрукты и ягоды", "Овощи"];
 var forWomen = new SubList();
-forWomen.addDefiniteNumberOfItems(20);
+forWomen.addDefiniteNumberOfItems(forWomenList);
 var shoes = new SubList();
-shoes.addDefiniteNumberOfItems(10);
+shoes.addDefiniteNumberOfItems(shoesList);
+var forChildren = new SubList();
+forChildren.addDefiniteNumberOfItems(forChildrenList);
+var forMen = new SubList();
+forMen.addDefiniteNumberOfItems(forMenList);
+var house = new SubList();
+house.addDefiniteNumberOfItems(houseList);
+var newYear = new SubList();
+newYear.addDefiniteNumberOfItems(newYearList);
+var beauty = new SubList();
+beauty.addDefiniteNumberOfItems(beautyList);
+var accessories = new SubList();
+accessories.addDefiniteNumberOfItems(accessoriesList);
+var electro = new SubList();
+electro.addDefiniteNumberOfItems(electroList);
+var toys = new SubList();
+toys.addDefiniteNumberOfItems(toysList);
+var furniture = new SubList();
+furniture.addDefiniteNumberOfItems(furnitureList);
+var forAdult = new SubList();
+forAdult.addDefiniteNumberOfItems(forAdultList);
+var products = new SubList();
+products.addDefiniteNumberOfItems(productsList);
 },{"./functions":"src/JS/modules/functions.js","./HeaderEvents":"src/JS/modules/HeaderEvents.js"}],"src/JS/modules/Swiper.js":[function(require,module,exports) {
 "use strict";
 
@@ -445,7 +515,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50986" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54289" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

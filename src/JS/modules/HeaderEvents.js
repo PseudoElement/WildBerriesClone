@@ -54,6 +54,39 @@ liList.forEach((li) => {
     if(Array.from(li.classList).includes('shoes')){
         switchONsublist(1);
     }
+    if(Array.from(li.classList).includes('forChildren')){
+      switchONsublist(2);
+    }
+    if(Array.from(li.classList).includes('forMen')){
+      switchONsublist(3);
+    }
+    if(Array.from(li.classList).includes('house')){
+      switchONsublist(4);
+    }
+    if(Array.from(li.classList).includes('newYear')){
+      switchONsublist(5);
+    }
+    if(Array.from(li.classList).includes('beauty')){
+      switchONsublist(6);
+    }
+    if(Array.from(li.classList).includes('accessories')){
+      switchONsublist(7);
+    }
+    if(Array.from(li.classList).includes('electro')){
+      switchONsublist(8);
+    }
+    if(Array.from(li.classList).includes('toys')){
+      switchONsublist(9);
+    }
+    if(Array.from(li.classList).includes('furniture')){
+      switchONsublist(10);
+    }
+    if(Array.from(li.classList).includes('forAdult')){
+      switchONsublist(11);
+    }
+    if(Array.from(li.classList).includes('products')){
+      switchONsublist(12);
+    }
   });
 });
 export { burger, menu, closeBtn };
