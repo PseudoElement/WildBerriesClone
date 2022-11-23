@@ -2,6 +2,18 @@
 body {
     background-color: black;
     user-select: none;
+    &::-webkit-scrollbar{
+        width: 15px;
+    }
+    &::-webkit-scrollbar-track{
+        border-radius: 10px;
+        background-color: rgb(121, 121, 134);
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: rgb(164, 241, 21);
+        border: 5px solid rgb(121, 121, 134);
+        border-radius: 20px;
+    }
 }
 html {
     font-size: 15px;
@@ -98,7 +110,8 @@ header {
     display: flex;
     width: 100%;
     max-width: 1200px;
-    height: 400px;
+    // height: 400px;
+    aspect-ratio: 16/9;
     overflow: hidden;
     transition: all 0.5s;
     .slide {
@@ -161,13 +174,14 @@ header {
     }
 }
 .menu {
+    
     font-size: 20px;
     position: fixed;
     top: 0;
     z-index: 11;
     left: -25rem;
     height: 100%;
-    max-height: 40rem;
+    // max-height: 40rem;
     font-size: 1.6rem;
     width: 100%;
     max-width: 20rem;
@@ -184,7 +198,9 @@ header {
         li {
             flex: 1 0 auto;
             transition: all 0.3s;
-            padding-top: 7px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
             &:hover {
                 background-color: rgb(188, 30, 135);
@@ -209,6 +225,24 @@ header {
     display: none;
     overflow: auto;
     padding: 1rem;
+    &::-webkit-scrollbar{
+        width: 15px;
+    }
+    &::-webkit-scrollbar-track{
+        border-radius: 10px;
+        background-color: rgb(121, 121, 134);
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: rgb(164, 241, 21);
+        border: 5px solid rgb(121, 121, 134);
+        border-radius: 20px;
+    }
+    .subList-title{
+        text-align: center;
+        font-family: cursive;
+        font-weight: 900;
+        font-size: 30px;
+    }
     &.active {
         display: flex;
     }
