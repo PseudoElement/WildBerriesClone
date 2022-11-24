@@ -1,5 +1,5 @@
-import { menu, closeBtn } from "./HeaderEvents";
-import { subListsArray } from "./SubLists";
+import { closeBtn, menu } from "./const.js";
+import { SubList, arrData, subListsWrapper } from "./SubLists.js";
 function createEl(tag = "div", options = {}) {
   const el = document.createElement(tag);
   if (options.src) el.src = options.src;
@@ -17,40 +17,48 @@ function scrollByX(el, slide) {
 function closeList() {
   menu.style.left = "-25rem";
   closeBtn.style.left = "-20rem";
-  subListsArray.forEach((sublist) => {
-    sublist.classList.remove("active");
-  });
+  subListsWrapper.classList.remove("active");
 }
-function switchONsublist(index) {
-  subListsArray.forEach((sublist) => {
-    sublist.classList.remove("active");
+function switchONsublist(index, event) {
+  subListsWrapper.classList.add("active");
+  Array.from(subListsWrapper.children).forEach((child) => {
+    child.remove();
   });
-  subListsArray[index].classList.add("active");
+  const title = createEl('div',{
+    className: 'subList-title',
+    textContent: event.target.textContent
+  })
+  subListsWrapper.prepend(title);
+  arrData[index].itemList.forEach((item) => {
+    subListsWrapper.append(item);
+  });
   closeBtn.style.left = `${
-    menu.offsetWidth + subListsArray[index].offsetWidth + 5
+    menu.offsetWidth + subListsWrapper.offsetWidth + 5
   }px`;
 }
-function toggleDisability(type){
-  if(type === 'ON'){
-    Array.from(document.body.children).forEach(child=>{
-      Array.from(child.children).forEach(subChild=>{
-          if(!Array.from(subChild.classList).includes('menu') 
-          && !Array.from(subChild.classList).includes(`subList-wrapper`)){
-              subChild.classList.add('passive')
-          }
-      })
-    })
-  }
-  else{
-    Array.from(document.body.children).forEach(child=>{
-      Array.from(child.children).forEach(subChild=>{
-          if(!Array.from(subChild.classList).includes('menu') 
-          && !Array.from(subChild.classList).includes(`subList-wrapper`)){
-              subChild.classList.remove('passive');
-          }
-      })
-    })
+function toggleDisability(type) {
+  if (type === "ON") {
+    Array.from(document.body.children).forEach((child) => {
+      Array.from(child.children).forEach((subChild) => {
+        if (
+          !Array.from(subChild.classList).includes("menu") &&
+          !Array.from(subChild.classList).includes(`subList-wrapper`)
+        ) {
+          subChild.classList.add("passive");
+        }
+      });
+    });
+  } else {
+    Array.from(document.body.children).forEach((child) => {
+      Array.from(child.children).forEach((subChild) => {
+        if (
+          !Array.from(subChild.classList).includes("menu") &&
+          !Array.from(subChild.classList).includes(`subList-wrapper`)
+        ) {
+          subChild.classList.remove("passive");
+        }
+      });
+    });
   }
 }
-
 export { createEl, scrollByX, closeList, switchONsublist, toggleDisability };

@@ -5,8 +5,6 @@
 }
 
 *, *:before, *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -73,7 +71,10 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   background-color: black;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 html {
@@ -104,7 +105,7 @@ header {
   left: 0;
   right: 0;
   z-index: 10;
-  background: url(/header-BG.b790c151.jpg);
+  background: url(./BG/header-BG.jpg);
   background-size: cover;
   padding: 1rem 0;
 }
@@ -188,13 +189,13 @@ header .header_wrapper input {
   position: relative;
 }
 .swiper .slide:nth-child(1) {
-  background-image: url(/big_bf_main_new_18_11_22.959caf9f.jpg);
+  background-image: url(./pics/big_bf_main_new_18_11_22.jpg);
 }
 .swiper .slide:nth-child(2) {
-  background-image: url(/mob_autumn_13_10_22_224484959.325a81b3.jpg);
+  background-image: url(./pics/mob_autumn_13_10_22_224484959.jpg);
 }
 .swiper .slide:nth-child(3) {
-  background-image: url(/mob_electro_18_11.f4d45b30.jpg);
+  background-image: url(./pics/mob_electro_18_11.jpg);
 }
 .swiper .slide .info {
   display: flex;
@@ -214,9 +215,20 @@ header .header_wrapper input {
 }
 .swiper .slide .arrow:hover {
   color: rgb(212, 78, 100);
-  animation-name: arrow-twitch;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
+  -webkit-animation-name: arrow-twitch;
+          animation-name: arrow-twitch;
+  -webkit-animation-duration: 0.3s;
+          animation-duration: 0.3s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+@-webkit-keyframes arrow-twitch {
+  0% {
+    top: 50%;
+  }
+  100% {
+    top: 49%;
+  }
 }
 @keyframes arrow-twitch {
   0% {
@@ -300,6 +312,4 @@ header .header_wrapper input {
   background-color: antiquewhite;
   border-radius: 10px;
   color: black;
-}
-
-/*# sourceMappingURL=/styles.d5af2b6d.css.map */
+}/*# sourceMappingURL=styles.css.map */
