@@ -38,5 +38,4 @@ function fillSublists(menuList){
   }
 }
 fillSublists(menuList);
-console.log(arrData);
 export { subListsArray, arrData, subListsWrapper };
