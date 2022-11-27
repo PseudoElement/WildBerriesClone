@@ -49,6 +49,7 @@ class Swiper {
   addEvents() {
     this.slidesList.forEach((slide) => {
       slide.arrowNext.addEventListener("click", () => {
+        clearInterval(this.idInterval);
         this.autoScroll();
         this.page++;
         if (this.page > this.slidesList.length - 1) this.page = 0;

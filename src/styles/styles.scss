@@ -21,7 +21,7 @@ html {
 main {
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
-  margin-top: 85px;
+  margin: 85px auto;
   padding: 1rem;
 }
 .active {
@@ -109,7 +109,7 @@ header {
   display: flex;
   width: 100%;
   max-width: 1200px;
-  // height: 400px;
+  height: 400px;
   aspect-ratio: 16/9;
   overflow: hidden;
   transition: all 0.5s;
@@ -260,26 +260,30 @@ header {
   }
 }
 .goodsWrapper {
-  margin-top: 2rem;
+  margin: 20px auto;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
   .slot {
+    // max-height: 300px;
+    flex: 1 1 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // text-align: center;
-    max-width: 300px;
+    // max-width: 300px;
     .slot-img {
-        flex: 1 1 auto;
       border: 5px solid red;
-      height: 100%;
-      width: 100%;
       max-width: 300px;
+      width: 100%;
     }
     .description {
+      gap: 10px;
       display: flex;
       align-items: center;
+      max-width: 300px;
+      max-height: 200px;
+      overflow: auto;
       justify-content: space-between;
     }
   }
