@@ -1,5 +1,7 @@
 @import "null.scss";
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&display=swap');
 body {
+  font-family: 'Shippori Mincho';
   background-color: black;
   user-select: none;
   &::-webkit-scrollbar {
@@ -19,10 +21,17 @@ html {
   font-size: 15px;
 }
 main {
+  font-family: 'Shippori Mincho';
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   margin: 85px auto;
   padding: 1rem;
+  .subList-title {
+    text-align: center;
+    font-family: cursive;
+    font-weight: 900;
+    font-size: 30px;
+  }
 }
 .active {
   opacity: 1;
@@ -208,8 +217,8 @@ header {
     }
   }
   .close-button {
+    z-index: 20;
     position: absolute;
-    left: 20rem;
     color: rgb(209, 229, 232);
     font-size: 3rem;
     cursor: pointer;
@@ -234,12 +243,6 @@ header {
     background-color: rgb(164, 241, 21);
     border: 5px solid rgb(121, 121, 134);
     border-radius: 20px;
-  }
-  .subList-title {
-    text-align: center;
-    font-family: cursive;
-    font-weight: 900;
-    font-size: 30px;
   }
   &.active {
     display: flex;
@@ -266,16 +269,34 @@ header {
   flex-wrap: wrap;
   gap: 20px;
   .slot {
-    // max-height: 300px;
-    flex: 1 1 20%;
+    position: relative;
+    height: 300px;
+    // flex: 1 1 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // max-width: 300px;
+    justify-content: space-between;
+    .buttonsWrapper {
+      position: absolute;
+      left: 35%;
+      top: 80%;
+      color: white;
+      display: flex;
+      font-size: 30px;
+      align-items: center;
+      .btn {
+        width: 40px;
+        font-size: 30px;
+        border-radius: 15px;
+      }
+    }
+
     .slot-img {
-      border: 5px solid red;
+      border: 1px solid rgb(255, 255, 255);
+      border-radius: 20px;
       max-width: 300px;
-      width: 100%;
+      width: 80%;
+      height: 100%;
     }
     .description {
       gap: 10px;
@@ -285,6 +306,60 @@ header {
       max-height: 200px;
       overflow: auto;
       justify-content: space-between;
+    }
+    .price {
+      font-weight: 900;
+    }
+  }
+}
+.basket-wrapper {
+  width: 100%;
+  max-width: 20rem;
+  position: fixed;
+  top: 0;
+  right: -25rem;
+  height: 100%;
+  z-index: 11;
+  background: white;
+  border-radius: 10px;
+  transition: all 0.4s;
+  .basket-totalPrice{
+    font-family: 'Shippori Mincho', serif;
+    margin-top: 10px;
+    font-size: 30px;
+  }
+  
+  .basketItem {
+    position: relative;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100%;
+    height: 150px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .basketItem-delete{
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: white;
+      &:hover{
+        color: red;
+      }
+      &:before{
+        content: '⮾';
+        font-size: 30px;
+      }
+    }
+    .description{
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+    }
+    &-image{
+      max-width: 120px;
+      width: 100%;
     }
   }
 }
