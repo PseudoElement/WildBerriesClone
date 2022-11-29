@@ -1,20 +1,14 @@
-import { createEl} from "./functions.js";
+import { createEl, calcTotalPrice,calcAmountOfItemsInBasket } from "./functions.js";
 import { main, basketBtn } from "./const.js";
 import { slotsData } from "./goods.js";
 const basket = createEl("div", {
   className: "basket-wrapper",
 });
-let totalPriceCounter = 0;
-const totalPrice = createEl('div',{
-  className: 'basket-totalPrice',
-  textContent: `Итого: ${totalPriceCounter}`
-})
 main.append(basket);
 const title = createEl("div", {
   className: "subList-title",
   textContent: "Корзина",
 });
-basket.prepend(title, totalPrice);
 const itemsInBasketData = [];
 class ItemInBasket {
   constructor(image, price, info, number) {
@@ -23,13 +17,18 @@ class ItemInBasket {
     this.image.src = image;
     this.price.innerHTML = `Price: <span>${price}</span>`;
     this.description.append(this.price, this.info);
-    this.basketItem.append(this.image, this.number, this.description, this.deleteBtn);
+    this.basketItem.append(
+      this.image,
+      this.number,
+      this.description,
+      this.deleteBtn
+    );
     basket.append(this.basketItem);
     this.addEvents();
   }
-  deleteBtn = createEl('button',{
-    className: 'basketItem-delete'
-  })
+  deleteBtn = createEl("button", {
+    className: "basketItem-delete",
+  });
   basketItem = createEl("div", {
     className: "basketItem",
   });
@@ -48,17 +47,26 @@ class ItemInBasket {
   number = createEl("div", {
     className: "number",
   });
-  addEvents(){
-    this.deleteBtn.addEventListener('click', (event)=>{
+  addEvents() {
+    this.deleteBtn.addEventListener("click", (event) => {
       event.stopPropagation();
       event.target.closest(`.basketItem`).remove();
-      slotsData.forEach(slot=>{
-        if(slot.infoSlot.textContent === this.info.textContent) slot.isAddedInBasket = false;
-      })
-     const foundIndex = itemsInBasketData.findIndex(item=> item.deleteBtn === this.deleteBtn);
-     itemsInBasketData.splice(foundIndex, 1);
-    })
+      slotsData.forEach((slot) => {
+        if (slot.infoSlot.textContent === this.info.textContent)
+          slot.isAddedInBasket = false;
+      });
+      const foundIndex = itemsInBasketData.findIndex(
+        (item) => item.deleteBtn === this.deleteBtn
+      );
+      itemsInBasketData.splice(foundIndex, 1);
+      calcAmountOfItemsInBasket();
+      calcTotalPrice();
+    });
   }
 }
- 
-export { basket, ItemInBasket, itemsInBasketData, totalPriceCounter};
+const basketBtnCounter = createEl("div", {
+  className: "basketBtn-counter",
+  textContent: `${itemsInBasketData.length}`,
+});
+basketBtn.append(basketBtnCounter);
+export { basket, ItemInBasket, itemsInBasketData, title, basketBtnCounter };

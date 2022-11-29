@@ -1,6 +1,11 @@
 import { closeBtn, menu } from "./const.js";
 import { SubList, arrData, subListsWrapper } from "./SubLists.js";
-import { basket, itemsInBasketData, totalPriceCounter } from "./basket.js";
+import {
+  basket,
+  itemsInBasketData,
+  title,
+  basketBtnCounter,
+} from "./basket.js";
 function createEl(tag = "div", options = {}) {
   const el = document.createElement(tag);
   if (options.src) el.src = options.src;
@@ -65,15 +70,27 @@ function toggleDisability(type) {
     });
   }
 }
+const totalPrice = createEl("div", {
+  className: "basket-totalPrice",
+  textContent: "Итого: 0",
+});
+basket.prepend(title, totalPrice);
 function calcTotalPrice() {
-  let sum = itemsInBasketData.reduce((result, item) => {
+  const result = itemsInBasketData.reduce((result, item) => {
     return (
       result +
       Number(item.number.textContent) *
         parseFloat(item.price.querySelector(`span`).textContent)
     );
   }, 0);
-  totalPriceCounter = sum;
+  totalPrice.textContent = `Итого: ${result}`;
+}
+function calcAmountOfItemsInBasket() {
+  if (itemsInBasketData.length === 0){
+    return (basketBtnCounter.style.display = "none");
+  }
+    basketBtnCounter.style.display = 'block';
+    basketBtnCounter.textContent = `${itemsInBasketData.length}`;
 }
 export {
   createEl,
@@ -82,5 +99,5 @@ export {
   switchONsublist,
   toggleDisability,
   calcTotalPrice,
-  totalPriceCounter,
+  calcAmountOfItemsInBasket,
 };

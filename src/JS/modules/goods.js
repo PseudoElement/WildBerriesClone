@@ -1,4 +1,4 @@
-import { createEl, calcTotalPrice, totalPriceCounter} from "./functions.js";
+import { createEl, calcTotalPrice, calcAmountOfItemsInBasket} from "./functions.js";
 import { main } from "./const.js";
 import { ItemInBasket, itemsInBasketData } from "./basket.js";
 const URL = "https://637ea45a5b1cc8d6f931a9b2.mockapi.io/goods";
@@ -7,7 +7,6 @@ const goodsWrapper = createEl("div", {
 });
 const slotsData = [];
 main.append(goodsWrapper);
-
 fetch(URL, {
   method: "GET",
 })
@@ -97,8 +96,8 @@ class Slot {
           }
         })
         this.counter.textContent = 0;
-        console.log(totalPriceCounter);
         calcTotalPrice();
+        calcAmountOfItemsInBasket()
         return;
       }
       this.isAddedInBasket = true;
@@ -110,7 +109,7 @@ class Slot {
       );
       itemsInBasketData.push(newItemInBasket);
       this.counter.textContent = 0;
-      console.log(totalPriceCounter);
+      calcAmountOfItemsInBasket()
       calcTotalPrice();
     });
   }
