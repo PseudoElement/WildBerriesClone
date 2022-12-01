@@ -5,6 +5,7 @@ import {
   itemsInBasketData,
   title,
   basketBtnCounter,
+  slotsData,
 } from "./basket.js";
 function createEl(tag = "div", options = {}) {
   const el = document.createElement(tag);
@@ -86,11 +87,28 @@ function calcTotalPrice() {
   totalPrice.textContent = `Итого: ${result}`;
 }
 function calcAmountOfItemsInBasket() {
-  if (itemsInBasketData.length === 0){
+  if (itemsInBasketData.length === 0) {
     return (basketBtnCounter.style.display = "none");
   }
-    basketBtnCounter.style.display = 'block';
-    basketBtnCounter.textContent = `${itemsInBasketData.length}`;
+  basketBtnCounter.style.display = "block";
+  basketBtnCounter.textContent = `${itemsInBasketData.length}`;
+}
+function deleteItemInBasket(event) {
+  event.stopPropagation();
+  slotsData.forEach((slot) => {
+    if (
+      slot.infoSlot.textContent ===
+      event.target.closest(`.basketItem`).querySelector(`.basketItem-info`).textContent
+    )
+      slot.isAddedInBasket = false;
+  });
+  const foundIndex = itemsInBasketData.findIndex(
+    (item) => item.deleteBtn === event.target.closest(`.basketItem`).childNodes[3]
+  );
+  itemsInBasketData.splice(foundIndex, 1);
+  event.target.closest(`.basketItem`).remove();
+  calcAmountOfItemsInBasket();
+  calcTotalPrice();
 }
 export {
   createEl,
@@ -100,4 +118,5 @@ export {
   toggleDisability,
   calcTotalPrice,
   calcAmountOfItemsInBasket,
+  deleteItemInBasket,
 };

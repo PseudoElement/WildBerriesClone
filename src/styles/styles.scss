@@ -1,7 +1,7 @@
 @import "null.scss";
-@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&display=swap");
 body {
-  font-family: 'Shippori Mincho';
+  font-family: "Shippori Mincho";
   background-color: black;
   user-select: none;
   &::-webkit-scrollbar {
@@ -21,7 +21,7 @@ html {
   font-size: 15px;
 }
 main {
-  font-family: 'Shippori Mincho';
+  font-family: "Shippori Mincho";
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
   margin: 85px auto;
@@ -60,9 +60,9 @@ header {
     align-items: center;
     gap: 1rem;
     .svg {
-      &.basket{
+      &.basket {
         position: relative;
-        .basketBtn-counter{
+        .basketBtn-counter {
           display: none;
           position: absolute;
           top: 50%;
@@ -134,7 +134,7 @@ header {
   display: flex;
   width: 100%;
   max-width: 1200px;
-  height: 400px;
+  // height: 400px;
   aspect-ratio: 16/9;
   overflow: hidden;
   transition: all 0.5s;
@@ -283,11 +283,23 @@ header {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 2rem;
   .slot {
+    padding-bottom: 1rem;
+    transition: all .3s;
+    &:hover{
+      box-shadow: 0 0 10px 2px black;
+      border-radius: 20px;
+      animation-name: move-up;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+    .buttonsWrapper{
+      display: flex;
+    }
+    }
     position: relative;
     height: 300px;
-    // flex: 1 1 20%;
+    // flex: 0 0 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -295,9 +307,9 @@ header {
     .buttonsWrapper {
       position: absolute;
       left: 35%;
-      top: 80%;
+      top: 75%;
       color: white;
-      display: flex;
+      display: none;
       font-size: 30px;
       align-items: center;
       .btn {
@@ -305,14 +317,17 @@ header {
         font-size: 30px;
         border-radius: 15px;
       }
+      .slot-counter{
+        color: black;
+      }
     }
 
     .slot-img {
-      border: 1px solid rgb(255, 255, 255);
+      // border: 1px solid rgb(255, 255, 255);
       border-radius: 20px;
       max-width: 300px;
-      width: 80%;
-      height: 100%;
+      width: 100%;
+      // height: 100%;
     }
     .description {
       gap: 10px;
@@ -320,8 +335,15 @@ header {
       align-items: center;
       max-width: 300px;
       max-height: 200px;
-      overflow: auto;
       justify-content: space-between;
+    }
+    @keyframes move-up {
+      0%{
+        top: 0;
+      }
+      100%{
+        top: -1rem;
+      }
     }
     .price {
       font-weight: 900;
@@ -339,12 +361,12 @@ header {
   background: white;
   border-radius: 10px;
   transition: all 0.4s;
-  .basket-totalPrice{
-    font-family: 'Shippori Mincho', serif;
+  .basket-totalPrice {
+    font-family: "Shippori Mincho", serif;
     margin-top: 10px;
     font-size: 30px;
   }
-  
+
   .basketItem {
     position: relative;
     border: 2px solid black;
@@ -355,25 +377,52 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .basketItem-delete{
+    .numberChanger {
+      width: 80px;
+      font-size: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .basket-btnPlus {
+        background-color: transparent;
+        &::before {
+          content: "➕";
+          color: black;
+        }
+      }
+      .basket-btnMinus {
+        background-color: transparent;
+        color: black;
+        &::before{
+          content: '➖';
+          color: black;
+        }
+      }
+    }
+    .basketItem-delete {
       position: absolute;
-      top: 5px;
+      top: -7px;
       right: 5px;
-      background-color: white;
-      &:hover{
+      background-color: transparent;
+      &:hover {
         color: red;
       }
-      &:before{
-        content: '⮾';
+      &:before {
+        content: "⮾";
         font-size: 30px;
       }
     }
-    .description{
+    .description {
       display: flex;
+      height: 60px;
       flex-direction: column;
+      justify-content: space-between;
+      z-index: 20;
       text-align: right;
+      flex: 1 1 50%;
     }
-    &-image{
+    &-image {
+      height: 100%;
       max-width: 120px;
       width: 100%;
     }

@@ -24,9 +24,9 @@ fetch(URL, {
     console.error(err);
   });
 class Slot {
-  constructor(image, info, price, isAddedInBasket = false) {
+  constructor(img, info, price, isAddedInBasket = false) {
     this.isAddedInBasket = isAddedInBasket;
-    this.addSlot(image, info, price);
+    this.addSlot(img, info, price);
     this.addEvents();
   }
   addSlot(img, info, price) {
