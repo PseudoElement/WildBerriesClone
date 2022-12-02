@@ -114,4 +114,5 @@ class Slot {
     });
   }
 }
+
 export { goodsWrapper, slotsData };

@@ -119,4 +119,5 @@ export {
   calcTotalPrice,
   calcAmountOfItemsInBasket,
   deleteItemInBasket,
+  totalPrice
 };
