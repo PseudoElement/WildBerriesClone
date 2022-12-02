@@ -6,7 +6,7 @@ const subListsWrapper = createEl("div", {
 });
 main.append(subListsWrapper);
 subListsWrapper.style.position = "fixed";
-subListsWrapper.style.zIndex = 11;
+subListsWrapper.style.zIndex = 9;
 subListsWrapper.style.borderRadius = "10px";
 subListsWrapper.style.top = `${menu.offsetTop}px`;
 subListsWrapper.style.left = `${menu.offsetWidth}px`;

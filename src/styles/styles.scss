@@ -46,7 +46,7 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 10;
+  z-index: 8;
   background: url(./BG/header-BG.jpg);
   background-size: cover;
   padding: 1rem 0;
@@ -134,21 +134,19 @@ header {
   display: flex;
   width: 100%;
   max-width: 1200px;
-  // height: 400px;
-  aspect-ratio: 16/9;
   overflow: hidden;
   transition: all 0.5s;
   .slide {
+    
     transition: all 0.5s;
     background-size: 100% 100%;
-    &:nth-child(1) {
-      background-image: url(./pics/big_bf_main_new_18_11_22.jpg);
-    }
-    &:nth-child(2) {
-      background-image: url(./pics/mob_autumn_13_10_22_224484959.jpg);
-    }
-    &:nth-child(3) {
-      background-image: url(./pics/mob_electro_18_11.jpg);
+    .image-bg{
+      width: 100%;
+      height: 100%;
+      &:hover{
+        filter: brightness(80%);
+        transition: all 0.3s;
+      }
     }
     width: 100%;
     flex-shrink: 0;
@@ -166,8 +164,9 @@ header {
       }
     }
     .arrow {
+      z-index: 10;
       color: rgb(123, 9, 204);
-      opacity: 0.9;
+      // opacity: 0.9;
       position: absolute;
       top: 50%;
       font-size: 40px;
@@ -197,11 +196,23 @@ header {
     }
   }
 }
+.close-button {
+  z-index: 11;
+  transition: none !important;
+  top: 0;
+  position: absolute;
+  color: rgb(38, 205, 121);
+  font-size: 3rem;
+  cursor: pointer;
+  &:hover{
+    color: red;
+  }
+}
 .menu {
   font-size: 20px;
   position: fixed;
   top: 0;
-  z-index: 11;
+  z-index: 10;
   left: -25rem;
   height: 100%;
   // max-height: 40rem;
@@ -231,13 +242,6 @@ header {
         border-radius: 10px;
       }
     }
-  }
-  .close-button {
-    z-index: 20;
-    position: absolute;
-    color: rgb(209, 229, 232);
-    font-size: 3rem;
-    cursor: pointer;
   }
 }
 .subList-wrapper {
@@ -285,6 +289,7 @@ header {
   flex-wrap: wrap;
   gap: 2rem;
   .slot {
+    background:rgba(212, 91, 236, 0.3);
     cursor: pointer;
     padding-bottom: 1rem;
     transition: all .3s;
@@ -299,7 +304,7 @@ header {
     }
     }
     position: relative;
-    height: 300px;
+    height: 400px;
     // flex: 0 0 20%;
     display: flex;
     flex-direction: column;
@@ -307,16 +312,61 @@ header {
     justify-content: space-between;
     .buttonsWrapper {
       position: absolute;
-      left: 35%;
-      top: 75%;
+      // left: 35%;
+      top: 70%;
       color: white;
-      display: none;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      // justify-content: space-between;
       font-size: 30px;
       align-items: center;
+      .row1{
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .row2{
+        width: 100%;
+        max-width: 160px;
+        height: 2rem;
+        .addInBasketBtn{
+          border-radius: 20px;
+          background-color: rgb(189, 35, 146);
+          width: 100%;
+          height: 100%;
+          color: white;
+          &:hover{
+            transition: all .3s;
+            background-color: blueviolet;
+          }
+        }
+      }
       .btn {
+        transition: all .2s;
         width: 40px;
         font-size: 30px;
-        border-radius: 15px;
+        border-radius: 50%;
+        box-shadow: 0 4px 9px 2px rgb(187, 39, 165);
+        &:hover{
+          box-shadow: 0 0px 9px 2px rgb(32, 185, 236);
+        }
+        &:active{
+          background: -webkit-linear-gradient(top, #d2ff52 0%,#91e842 100%);
+          box-shadow: 0 0px 9px 2px rgb(160, 191, 34);
+          color: white;
+        }
+        &.btnPlus{
+          &::before {
+            content: "+";
+          }
+        }
+        &.btnMinus{
+          &::before{
+            content: '−';
+          }
+        }
       }
       .slot-counter{
         color: black;
@@ -327,7 +377,7 @@ header {
       border-radius: 20px 20px 0 0;
       max-width: 300px;
       width: 100%;
-      // height: 100%;
+      height: 70%;
     }
     .description {
       gap: 10px;
@@ -352,15 +402,29 @@ header {
 }
 .basket-wrapper {
   width: 100%;
-  max-width: 20rem;
+  max-width: 30rem;
   position: fixed;
   top: 0;
-  right: -25rem;
+  right: -35rem;
   height: 100%;
   z-index: 11;
   background: white;
   border-radius: 10px;
   transition: all 0.4s;
+  overflow: auto;
+  padding: 1rem;
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: rgb(121, 121, 134);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(164, 241, 21);
+    border: 5px solid rgb(121, 121, 134);
+    border-radius: 20px;
+  }
   .basket-totalPrice {
     font-family: "Shippori Mincho", serif;
     margin-top: 10px;
@@ -368,6 +432,7 @@ header {
   }
 
   .basketItem {
+    margin: 1rem 0;
     position: relative;
     border: 2px solid black;
     border-radius: 10px;
@@ -377,12 +442,16 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    &-image{
+      border-radius: 25px;
+    }
     .numberChanger {
       width: 80px;
       font-size: 25px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-left: 2rem;
       .basket-btnPlus {
         background-color: transparent;
         &::before {

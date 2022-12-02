@@ -2,13 +2,31 @@ import {
   createEl,
   calcTotalPrice,
   calcAmountOfItemsInBasket,
-  deleteItemInBasket
+  deleteItemInBasket,
+  closeList,
+  toggleDisability
 } from "./functions.js";
 import { main, basketBtn } from "./const.js";
 import { slotsData } from "./goods.js";
 const basket = createEl("div", {
   className: "basket-wrapper",
 });
+const basketCloseBtn = createEl("div", {
+  className: "close-button",
+  textContent: "✖",
+});
+basket.append(basketCloseBtn);
+basketBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  basket.style.right = 0;
+  basketCloseBtn.style.right = `${basket.offsetWidth-50}px`
+  toggleDisability("ON");
+});
+basketCloseBtn.addEventListener('click',(event)=>{
+  event.stopPropagation();
+  closeList();
+  toggleDisability('OFF');
+})
 main.append(basket);
 const title = createEl("div", {
   className: "subList-title",
@@ -16,11 +34,11 @@ const title = createEl("div", {
 });
 const itemsInBasketData = [];
 class ItemInBasket {
-  constructor(image, price, info, number) {
-    this.addItem(image, price, info, number);
+  constructor(image, price, info, number, id) {
+    this.addItem(image, price, info, number, id);
     this.addEvents();
   }
-  addItem(image, price, info, number) {
+  addItem(image, price, info, number, id) {
     this.deleteBtn = createEl("button", {
       className: "basketItem-delete",
     });
@@ -34,9 +52,10 @@ class ItemInBasket {
       className: "basketItem-info",
       textContent: info,
     });
+    this.id = id;
     this.price = createEl("div", {
       className: "basketItem-price",
-      innerHTML: `Price: <span>${price}</span>`,
+      innerHTML: `Price: <span>${price}</span>$`,
     });
     this.image = createEl("img", {
       className: "basketItem-image",
@@ -73,14 +92,14 @@ class ItemInBasket {
       this.number.textContent++;
       calcTotalPrice();
     });
-    this.btnMinus.addEventListener('click', (event)=>{
-      if(+(this.number.textContent) <= 1){
-        deleteItemInBasket(event)
+    this.btnMinus.addEventListener("click", (event) => {
+      if (+this.number.textContent <= 1) {
+        deleteItemInBasket(event);
         return;
       }
       this.number.textContent--;
       calcTotalPrice();
-    })
+    });
   }
 }
 const basketBtnCounter = createEl("div", {
@@ -88,4 +107,12 @@ const basketBtnCounter = createEl("div", {
   textContent: `${itemsInBasketData.length}`,
 });
 basketBtn.append(basketBtnCounter);
-export { basket, ItemInBasket, itemsInBasketData, title, basketBtnCounter, slotsData };
+export {
+  basket,
+  ItemInBasket,
+  itemsInBasketData,
+  title,
+  basketBtnCounter,
+  slotsData,
+  basketCloseBtn
+};

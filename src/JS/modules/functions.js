@@ -6,6 +6,7 @@ import {
   title,
   basketBtnCounter,
   slotsData,
+  basketCloseBtn,
 } from "./basket.js";
 function createEl(tag = "div", options = {}) {
   const el = document.createElement(tag);
@@ -23,10 +24,11 @@ function scrollByX(el, slide) {
   });
 }
 function closeList() {
-  menu.style.left = "-25rem";
-  closeBtn.style.left = "-20rem";
+  menu.style.left = `-${menu.offsetWidth + 20}px`;
+  closeBtn.style.left = `-${menu.offsetWidth + 20}px`;
   subListsWrapper.classList.remove("active");
-  basket.style.right = "-25rem";
+  basket.style.right = `-${basket.offsetWidth + 20}px`;
+  basketCloseBtn.style.right = `-${basket.offsetWidth + 20}px`;
 }
 function switchONsublist(index, event) {
   subListsWrapper.classList.add("active");
@@ -37,12 +39,15 @@ function switchONsublist(index, event) {
     className: "subList-title",
     textContent: event.target.textContent,
   });
+  title.style.position = 'relative';
+  title.style.zIndex = 11;
   subListsWrapper.prepend(title);
   arrData[index].itemList.forEach((item) => {
     subListsWrapper.append(item);
   });
+  closeBtn.style.transition = 'none';
   closeBtn.style.left = `${
-    menu.offsetWidth + subListsWrapper.offsetWidth + 5
+    menu.offsetWidth + subListsWrapper.offsetWidth - 50
   }px`;
 }
 function toggleDisability(type) {
@@ -84,7 +89,7 @@ function calcTotalPrice() {
         parseFloat(item.price.querySelector(`span`).textContent)
     );
   }, 0);
-  totalPrice.textContent = `Итого: ${result}`;
+  totalPrice.textContent = `Итого: ${result}$`;
 }
 function calcAmountOfItemsInBasket() {
   if (itemsInBasketData.length === 0) {
@@ -98,12 +103,14 @@ function deleteItemInBasket(event) {
   slotsData.forEach((slot) => {
     if (
       slot.infoSlot.textContent ===
-      event.target.closest(`.basketItem`).querySelector(`.basketItem-info`).textContent
+      event.target.closest(`.basketItem`).querySelector(`.basketItem-info`)
+        .textContent
     )
       slot.isAddedInBasket = false;
   });
   const foundIndex = itemsInBasketData.findIndex(
-    (item) => item.deleteBtn === event.target.closest(`.basketItem`).childNodes[3]
+    (item) =>
+      item.deleteBtn === event.target.closest(`.basketItem`).childNodes[3]
   );
   itemsInBasketData.splice(foundIndex, 1);
   event.target.closest(`.basketItem`).remove();
@@ -119,5 +126,5 @@ export {
   calcTotalPrice,
   calcAmountOfItemsInBasket,
   deleteItemInBasket,
-  totalPrice
+  totalPrice,
 };

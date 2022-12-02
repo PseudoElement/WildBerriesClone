@@ -1,4 +1,8 @@
-import { createEl, calcTotalPrice, calcAmountOfItemsInBasket} from "./functions.js";
+import {
+  createEl,
+  calcTotalPrice,
+  calcAmountOfItemsInBasket,
+} from "./functions.js";
 import { main } from "./const.js";
 import { ItemInBasket, itemsInBasketData } from "./basket.js";
 const URL = "https://637ea45a5b1cc8d6f931a9b2.mockapi.io/goods";
@@ -16,7 +20,8 @@ fetch(URL, {
       const newSlot = new Slot(
         `${object.image}?lock=${object.id}`,
         object.info,
-        object.price
+        object.price,
+        object.id
       );
     })
   )
@@ -24,18 +29,18 @@ fetch(URL, {
     console.error(err);
   });
 class Slot {
-  constructor(img, info, price, isAddedInBasket = false) {
-    this.isAddedInBasket = isAddedInBasket;
-    this.addSlot(img, info, price);
+  constructor(img, info, price, id) {
+    this.addSlot(img, info, price, id);
     this.addEvents();
   }
-  addSlot(img, info, price) {
+  addSlot(img, info, price, id) {
     this.slot = createEl("div", {
       className: "slot",
     });
+    this.id = id;
     this.priceSlot = createEl("div", {
       className: "price",
-      textContent: price,
+      innerHTML: `<span>${price}</span>$`,
     });
     this.imgSlot = createEl("img", {
       className: "slot-img",
@@ -51,13 +56,17 @@ class Slot {
     this.buttonsWrapper = createEl("div", {
       className: "buttonsWrapper",
     });
+    this.row1 = createEl("div", {
+      className: "row1",
+    });
+    this.row2 = createEl("div", {
+      className: "row2",
+    });
     this.btnPlus = createEl("button", {
       className: "btn btnPlus",
-      textContent: "+",
     });
     this.btnMinus = createEl("button", {
       className: "btn btnMinus",
-      textContent: "-",
     });
     this.counter = createEl("div", {
       className: "slot-counter",
@@ -68,12 +77,9 @@ class Slot {
       textContent: "В корзину",
     });
     goodsWrapper.append(this.slot);
-    this.buttonsWrapper.append(
-      this.btnPlus,
-      this.counter,
-      this.btnMinus,
-      this.addInBasket
-    );
+    this.row1.append(this.btnPlus, this.counter, this.btnMinus);
+    this.row2.append(this.addInBasket);
+    this.buttonsWrapper.append(this.row1, this.row2);
     this.description.append(this.priceSlot, this.infoSlot);
     this.slot.append(this.imgSlot, this.description, this.buttonsWrapper);
     slotsData.push(this);
@@ -88,28 +94,27 @@ class Slot {
     });
     this.addInBasket.addEventListener("click", (event) => {
       event.preventDefault();
-      if(parseInt(this.counter.textContent)<=0) return;
-      if(this.isAddedInBasket === true){
-         itemsInBasketData.forEach(item=>{
-          if(item.info.textContent === this.infoSlot.textContent){
-            item.number.textContent = +(item.number.textContent) + +(this.counter.textContent);
-          }
-        })
-        this.counter.textContent = 0;
-        calcTotalPrice();
-        calcAmountOfItemsInBasket()
-        return;
+      if (parseInt(this.counter.textContent) <= 0) return;
+      for (let item of itemsInBasketData) {
+        if (item.id === this.id) {
+          item.number.textContent =
+            +item.number.textContent + +this.counter.textContent;
+          this.counter.textContent = 0;
+          calcTotalPrice();
+          calcAmountOfItemsInBasket();
+          return;
+        }
       }
-      this.isAddedInBasket = true;
       const newItemInBasket = new ItemInBasket(
         this.imgSlot.src,
-        this.priceSlot.textContent,
+        this.priceSlot.querySelector(`span`).textContent,
         this.infoSlot.textContent,
-        this.counter.textContent
+        this.counter.textContent,
+        this.id
       );
       itemsInBasketData.push(newItemInBasket);
       this.counter.textContent = 0;
-      calcAmountOfItemsInBasket()
+      calcAmountOfItemsInBasket();
       calcTotalPrice();
     });
   }
