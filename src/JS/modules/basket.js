@@ -69,10 +69,10 @@ class ItemInBasket {
       className: "numberChanger",
     });
     this.btnPlus = createEl("button", {
-      className: "basket-btnPlus",
+      className: "basketBtn Plus",
     });
     this.btnMinus = createEl("button", {
-      className: "basket-btnMinus",
+      className: "basketBtn Minus",
     });
     this.description.append(this.price, this.info);
     this.numberChanger.append(this.btnPlus, this.number, this.btnMinus);

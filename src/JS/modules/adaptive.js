@@ -6,16 +6,12 @@ import img4 from "../../styles/pics/4slide.png";
 const imgArray = [img1, img2, img3, img4];
 const search = document.querySelector(`.svg.search`);
 const inputMobile = document.querySelector(`.header_wrapper2`);
+const slidesBGarray = document.querySelectorAll(`.image-bg`);
 window.addEventListener("DOMContentLoaded", () => {
   if (window.innerWidth < 770) {
-    let i = -1;
-    document.querySelectorAll(`.image-bg`).forEach((img) => {
+    slidesBGarray.forEach((img) => {
       img.style.objectFit = "fill";
-      i++;
-      for (i; i < imgArray.length; ) {
-        img.setAttribute("src", imgArray[i]);
-        return;
-      }
+      img.setAttribute('src', imgArray[Array.from(slidesBGarray).indexOf(img)]);
     });
     swiper.swiper.style.height = `300px`;
     document.querySelector(`.svg.logo`).style.display = "none";

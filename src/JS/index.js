@@ -15,6 +15,7 @@ import {
   basketBtnCounter,
 } from "../JS/modules/basket.js";
 import "../JS/modules/adaptive.js";
+import "../JS/modules/Watch.js";
 
 window.addEventListener("beforeunload", () => {
   const itemsInBasketINFO = [];
