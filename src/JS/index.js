@@ -16,7 +16,7 @@ import {
 } from "../JS/modules/basket.js";
 import "../JS/modules/adaptive.js";
 import "../JS/modules/Watch.js";
-
+import "../JS/modules/scroll-button.js"
 window.addEventListener("beforeunload", () => {
   const itemsInBasketINFO = [];
   itemsInBasketData.forEach((item) => {

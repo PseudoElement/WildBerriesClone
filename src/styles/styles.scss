@@ -54,6 +54,35 @@ main {
     font-weight: 900;
     font-size: 30px;
   }
+  .scrollBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    font-size: 2rem;
+    z-index: 5;
+    top: 100px;
+    left: 5px;
+    background: transparent;
+    border-radius: 50%;
+    transition: all 0.2s;
+    box-shadow: 0 0px 9px 2px rgb(187, 39, 165);
+    background: white;
+    &:hover {
+      box-shadow: 0 0px 9px 2px rgb(32, 185, 236);
+    }
+    &:active {
+      background: -webkit-linear-gradient(top, #df52ff 0%, #d52ea3 100%);
+      box-shadow: 0 0px 9px 2px rgb(152, 34, 191);
+      color: white;
+    }
+    span {
+      margin-bottom: 7px;
+      height: 100%;
+    }
+  }
 }
 .active {
   opacity: 1;
@@ -493,8 +522,8 @@ header {
     &-image {
       border-radius: 25px;
     }
-    &-price{
-        font-weight: 900;
+    &-price {
+      font-weight: 900;
     }
     .numberChanger {
       width: 33%;
