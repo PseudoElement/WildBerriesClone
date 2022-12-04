@@ -94,4 +94,4 @@ window.addEventListener("mouseover", (event) => {
     });
   }
 });
-export { Swiper };
+export { Swiper, swiper };

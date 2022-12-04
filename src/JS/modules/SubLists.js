@@ -11,7 +11,7 @@ subListsWrapper.style.borderRadius = "10px";
 subListsWrapper.style.top = `${menu.offsetTop}px`;
 subListsWrapper.style.left = `${menu.offsetWidth}px`;
 subListsWrapper.style.height = `${menu.offsetHeight}px`;
-subListsWrapper.style.width = `300px`;
+subListsWrapper.style.width = `${menu.offsetWidth}px`;
 subListsWrapper.style.backgroundColor = "white";
 const subListsArray = [];
 export class SubList {

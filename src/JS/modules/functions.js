@@ -47,7 +47,7 @@ function switchONsublist(index, event) {
   });
   closeBtn.style.transition = 'none';
   closeBtn.style.left = `${
-    menu.offsetWidth + subListsWrapper.offsetWidth - 50
+    menu.offsetWidth + subListsWrapper.offsetWidth - 33
   }px`;
 }
 function toggleDisability(type) {
