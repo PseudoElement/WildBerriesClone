@@ -5,7 +5,6 @@
   },
   "name": "wildberriesclone",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel ./src/index.html",
@@ -16,11 +15,11 @@
     "url": "git+https://github.com/PseudoElement/WildBerriesClone.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Me",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/PseudoElement/WildBerriesClone/issues"
   },
   "homepage": "https://github.com/PseudoElement/WildBerriesClone#readme",
-  "description": ""
+  "description": "First Project"
 }
