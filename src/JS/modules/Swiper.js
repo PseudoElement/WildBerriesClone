@@ -1,5 +1,11 @@
 import { createEl, scrollByX } from "./functions.js";
-const main = document.querySelector("main");      
+const main = document.querySelector("main");
+const imagesArr = [
+  `https://images.wbstatic.net/bners1/newbig_elki_02125656.jpg`,
+  `https://images.wbstatic.net/bners1/big_moda_1_12_2248548.jpg`,
+  `https://images.wbstatic.net/bners1/big_autumn_13_10_22_224566.jpg`,
+  `https://images.wbstatic.net/bners1/big_inditexx_14_11_22.jpg`,
+];
 class Swiper {
   slidesList = [];
   swiper = createEl("div", {
@@ -8,12 +14,13 @@ class Swiper {
   constructor(parentNode) {
     parentNode.prepend(this.swiper);
   }
-  addSlide(options = {}) {
+  addSlide(options = { image }) {
     this.slide = createEl("div", {
       className: "slide",
     });
-    this.image = createEl("image", {
+    this.image = createEl("img", {
       className: "image-bg",
+      src: options.image,
     });
     this.arrowNext = createEl("div", {
       className: "arrow arrowNext",
@@ -49,6 +56,7 @@ class Swiper {
   addEvents() {
     this.slidesList.forEach((slide) => {
       slide.arrowNext.addEventListener("click", () => {
+        clearInterval(this.idInterval);
         this.autoScroll();
         this.page++;
         if (this.page > this.slidesList.length - 1) this.page = 0;
@@ -71,19 +79,19 @@ class Swiper {
   }
 }
 const swiper = new Swiper(main);
-swiper.addSlide();
-swiper.addSlide();
-swiper.addSlide();
+swiper.addSlide({ image: imagesArr[0] });
+swiper.addSlide({ image: imagesArr[1] });
+swiper.addSlide({ image: imagesArr[2] });
+swiper.addSlide({ image: imagesArr[3] });
 swiper.addEvents();
 swiper.autoScroll();
-window.addEventListener('mouseover', (event)=>{
-  if(event.target.className === 'slide'){
+window.addEventListener("mouseover", (event) => {
+  if (event.target.className === "slide") {
     event.target.style.opacity = 0.8;
-  }
-  else{
-    document.querySelectorAll('.slide').forEach(slide=>{
+  } else {
+    document.querySelectorAll(".slide").forEach((slide) => {
       slide.style.opacity = 1;
-    })
+    });
   }
-})
-export { Swiper };
+});
+export { Swiper, swiper };

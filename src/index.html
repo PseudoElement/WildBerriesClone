@@ -11,24 +11,31 @@
     <header>
       <div class="header_wrapper">
         <div class="list">
-            <img src="./styles/pics/svg/list-svgrepo-com.svg" alt="">
+          <img src="./styles/pics/svg/list-svgrepo-com.svg" alt="" />
         </div>
         <div class="svg logo">
           <img src="./styles/pics/WildberriesLogo.png" alt="" />
         </div>
-        <input type="text" placeholder="🔍 Search..." />
+        <input class="header_input" type="text" placeholder="🔍 Search..." />
+        <div class="svg search">
+          <img src="./styles/pics/svg/search.svg" alt="" />
+          <p>Искать</p>
+        </div>
         <div class="svg location">
-            <img src="./styles/pics/svg/location-svgrepo-com.svg" alt="">
-            <p>Адреса</p>
+          <img src="./styles/pics/svg/location-svgrepo-com.svg" alt="" />
+          <p>Адреса</p>
         </div>
         <div class="svg user">
-            <img src="./styles/pics/svg/user.svg" alt="">
-            <p>Войти</p>
+          <img src="./styles/pics/svg/user.svg" alt="" />
+          <p>Войти</p>
         </div>
         <div class="svg basket">
-            <img src="./styles/pics/svg/basket.svg" alt="">
-            <p>Корзина</p>
+          <img src="./styles/pics/svg/basket.svg" alt="" />
+          <p>Корзина</p>
         </div>
+      </div>
+      <div class="header_wrapper2">
+        <input class="header_input" type="text" placeholder="🔍 Search..." />
       </div>
     </header>
     <main>
@@ -51,6 +58,9 @@
         </ul>
       </section>
     </main>
+    <div id="mapBlock" class="map"></div>
     <script type="module" src="./JS/index.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=f35db048-0e1d-4163-b309-9b18b7c80b4f
+    &lang=ru_RU"></script>
   </body>
 </html>
