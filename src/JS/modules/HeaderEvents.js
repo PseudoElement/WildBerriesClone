@@ -1,11 +1,6 @@
-import { SubList, subListsArray } from "./SubLists";
-import { closeList, switchONsublist, toggleDisability } from "./functions";
-const burger = document.querySelector(`.list`);
-const header = document.querySelector(`header`);
-const closeBtn = document.getElementsByClassName(`close-button`)[0];
-const menu = document.querySelector(`section.menu`);
-const input = document.querySelector(`.header_wrapper input`);
-const liList = document.querySelectorAll(`section ul li`);
+import { SubList, subListsArray } from "./SubLists.js";
+import { burger, header, closeBtn, menu, input, liList } from "./const.js";
+import { closeList, switchONsublist, toggleDisability } from "./functions.js";
 input.addEventListener("click", (event) => {
   event.target.style.opacity = 1;
 });
@@ -14,11 +9,11 @@ burger.addEventListener("click", (event) => {
   menu.style.left = "0";
   menu.style.transition = "all .5s";
   closeBtn.style.left = `${menu.offsetWidth + 5}px`;
-  toggleDisability('ON');
+  toggleDisability("ON");
 });
 closeBtn.addEventListener("click", () => {
-    closeList();
-    toggleDisability('OFF');
+  closeList();
+  toggleDisability("OFF");
 });
 let prevScrollValue = window.scrollY;
 window.addEventListener("scroll", () => {
@@ -44,49 +39,29 @@ window.addEventListener("click", (event) => {
   if (event.target != input) {
     input.style.opacity = 0.5;
   }
-  toggleDisability('OFF');
+  toggleDisability("OFF");
 });
+let arrSublistsNames = [
+  "forWomen",
+  "shoes",
+  "forChildren",
+  "forMen",
+  "house",
+  "newYear",
+  "beauty",
+  "accessories",
+  "electro",
+  "toys",
+  "furniture",
+  "forAdult",
+  "products",
+];
 liList.forEach((li) => {
-  li.addEventListener("mouseover", () => {
-    if(Array.from(li.classList).includes('forWomen')){
-        switchONsublist(0);
-    }
-    if(Array.from(li.classList).includes('shoes')){
-        switchONsublist(1);
-    }
-    if(Array.from(li.classList).includes('forChildren')){
-      switchONsublist(2);
-    }
-    if(Array.from(li.classList).includes('forMen')){
-      switchONsublist(3);
-    }
-    if(Array.from(li.classList).includes('house')){
-      switchONsublist(4);
-    }
-    if(Array.from(li.classList).includes('newYear')){
-      switchONsublist(5);
-    }
-    if(Array.from(li.classList).includes('beauty')){
-      switchONsublist(6);
-    }
-    if(Array.from(li.classList).includes('accessories')){
-      switchONsublist(7);
-    }
-    if(Array.from(li.classList).includes('electro')){
-      switchONsublist(8);
-    }
-    if(Array.from(li.classList).includes('toys')){
-      switchONsublist(9);
-    }
-    if(Array.from(li.classList).includes('furniture')){
-      switchONsublist(10);
-    }
-    if(Array.from(li.classList).includes('forAdult')){
-      switchONsublist(11);
-    }
-    if(Array.from(li.classList).includes('products')){
-      switchONsublist(12);
-    }
+  li.addEventListener("mouseover", (event) => {
+    switchONsublist(
+      arrSublistsNames.findIndex((item) => item === li.classList[1]),
+      event
+    );
   });
 });
 export { burger, menu, closeBtn };

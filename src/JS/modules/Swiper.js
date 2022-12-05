@@ -1,5 +1,5 @@
-import { createEl, scrollByX } from "./functions";///<---У меня не получилось импортировать сюда картинки, 
-const main = document.querySelector("main");      ///можешь сам попробовать
+import { createEl, scrollByX } from "./functions.js";
+const main = document.querySelector("main");      
 class Swiper {
   slidesList = [];
   swiper = createEl("div", {
@@ -52,8 +52,7 @@ class Swiper {
         this.autoScroll();
         this.page++;
         if (this.page > this.slidesList.length - 1) this.page = 0;
-        // console.log( window.scrollX + this.slidesList[this.page].slide.getBoundingClientRect().left);<---посмотри, как изменяется абсолютное значение по Х для третьего слайда, в чем проблема?
-        scrollByX(this.swiper, this.slidesList[this.page].slide);// Я час сидел не мог понять почему это так работает, пока не добавил координату через offsetLeft
+        scrollByX(this.swiper, this.slidesList[this.page].slide);
       });
       slide.arrowPrev.addEventListener("click", () => {
         clearInterval(this.idInterval);
