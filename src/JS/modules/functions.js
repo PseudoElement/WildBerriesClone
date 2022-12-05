@@ -106,7 +106,6 @@ function deleteItemInBasket(event) {
       event.target.closest(`.basketItem`).querySelector(`.basketItem-info`)
         .textContent
     )
-      slot.isAddedInBasket = false;
   });
   const foundIndex = itemsInBasketData.findIndex(
     (item) =>
