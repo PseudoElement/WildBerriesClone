@@ -30,6 +30,7 @@ function closeList() {
   basket.style.right = `-${basket.offsetWidth + 20}px`;
   basketCloseBtn.style.right = `-${basket.offsetWidth + 20}px`;
 }
+
 function switchONsublist(index, event) {
   subListsWrapper.classList.add("active");
   Array.from(subListsWrapper.children).forEach((child) => {

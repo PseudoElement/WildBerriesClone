@@ -38,4 +38,5 @@ function fillSublists(menuList){
   }
 }
 fillSublists(menuList);
+
 export { subListsArray, arrData, subListsWrapper };
