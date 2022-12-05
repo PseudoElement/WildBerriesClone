@@ -100,13 +100,14 @@ function calcAmountOfItemsInBasket() {
 }
 function deleteItemInBasket(event) {
   event.stopPropagation();
-  slotsData.forEach((slot) => {
-    if (
-      slot.infoSlot.textContent ===
-      event.target.closest(`.basketItem`).querySelector(`.basketItem-info`)
-        .textContent
-    )
-  });
+  // slotsData.forEach((slot) => {
+  //   if (
+  //     slot.infoSlot.textContent ===
+  //     event.target.closest(`.basketItem`).querySelector(`.basketItem-info`)
+  //       .textContent
+  //   )
+  //     slot.isAddedInBasket = false;
+  // });
   const foundIndex = itemsInBasketData.findIndex(
     (item) =>
       item.deleteBtn === event.target.closest(`.basketItem`).childNodes[3]
